@@ -1,13 +1,23 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { removeFromCart, changeQuantity } from '../redux/cartSlice';
-import './CartPage.css'
+import './CartPage.css';
 
 function CartPage({ cart }) {
     const dispatch = useDispatch();
 
     const handleQuantityChange = (id, quantity) => {
         dispatch(changeQuantity({ id, quantity }));
+    };
+
+    const increaseQuantity = (id, quantity) => {
+        dispatch(changeQuantity({ id, quantity: quantity + 1 }));
+    };
+
+    const decreaseQuantity = (id, quantity) => {
+        if (quantity > 1) {
+            dispatch(changeQuantity({ id, quantity: quantity - 1 }));
+        }
     };
 
     return (
@@ -19,13 +29,11 @@ function CartPage({ cart }) {
                 cart.map((product) => (
                     <div key={product.id} className="cart-item">
                         <h4>{product.name}</h4>
-                        <p>Mahsulot soni:</p>
-                        <input
-                            type="number"
-                            value={product.quantity || 1}
-                            onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}
-                            min="1"
-                        />
+                        <div className="quantity-controls">
+                            <button onClick={() => decreaseQuantity(product.id, product.quantity || 1)}>-</button>
+                            <span>{product.quantity || 1}</span>
+                            <button onClick={() => increaseQuantity(product.id, product.quantity || 1)}>+</button>
+                        </div>
                         <button onClick={() => dispatch(removeFromCart(product.id))}>O'chirish</button>
                     </div>
                 ))

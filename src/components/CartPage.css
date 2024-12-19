@@ -19,10 +19,27 @@
     font-size: 18px;
 }
 
-.cart-item input[type="number"] {
-    width: 60px;
-    margin-left: 10px;
-    padding: 5px;
+.cart-item .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cart-item .quantity-controls button {
+    background-color: #3498db;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cart-item .quantity-controls button:hover {
+    background-color: #2980b9;
+}
+
+.cart-item .quantity-controls span {
+    font-size: 18px;
 }
 
 .cart-item button {
@@ -31,6 +48,7 @@
     padding: 5px 15px;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .cart-item button:hover {
